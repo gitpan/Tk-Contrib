@@ -37,6 +37,12 @@ v0.03: At least the 4 items build, test, and install (and the demo works)
 
 History:
 
+Version 0.06
+
+	o Axis: new -tickfont option. Patch send by
+          Phiroze Parakh <phiroze@eecs.umich.edu>
+	o Axis: options listed in SYNOPSIS section
+
 Version 0.0501
 
 	o Dial.pm: Oooops package was Dial not Tk::Dial as it should.

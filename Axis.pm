@@ -9,7 +9,31 @@ Tk::Axis - Canvas with Axes
 
     use Tk::Axis;
 
-    $t = $widget->Axis(-xmax => 10, -ymax => 10);                        
+    $widget = $parent->Axis(
+		       -height   => $height,
+		       -margin   => $margin,
+		       -tick     => $tick,
+		       -tickfont => $tik_font,
+		       -tst      => $tst,
+		       -width    => $width,
+		       -xmin     => $xmin,
+		       -xmax     => $xmax,
+		       -ymin     => $ymin,
+		       -ymax     => $ymax,
+		      );
+
+    #    height  - height of the window
+    #    width   - width  ......
+    #    xmin    - lowest x value we will display
+    #    xmax    - highest .....
+    #    ymin    - lowest y value .....
+    #    ymax    - highest .....
+    #    margin  - the number of pixels used as a margin around the plot
+    #    tick    - the length (in pixels) of the tickmarks
+    #    tst     - the step size for the tick marks
+    #    tst[x|y]- step size for tick marks on the x (or y) axis
+    #                (if not specified tst is used)
+    #    tickfont    - for for the lables
 
 
 =head1 DESCRIPTION
@@ -47,7 +71,7 @@ use Carp;
 
 
 use vars qw($VERSION);
-$VERSION = substr(q$Revision: 1.3 $, 10) + 1;
+$VERSION = substr(q$Revision: 1.4 $, 10) + 1;
 
 @ISA = qw(Tk::Derived Tk::Canvas);
 
@@ -78,33 +102,6 @@ Construct Tk::Widget 'Axis';
 #
 #   require Axis;
 #
-#   $AxisRef = $mw->Axis(
-# 		       -width => $width,
-# 		       -height => $height,
-# 		       -xmin   => $xmin,
-# 		       -xmax   => $xmax,
-# 		       -ymin   => $ymin,
-# 		       -ymax   => $ymax,
-# 		       -margin => $margin,
-# 		       -tick   => $tick,
-# 		       -tst    => $tst,
-# 		      );
-#
-#    mw      - a window reference (usually from a MainWindow->new call).
-#    height  - height of the window (Nick, what is the default for this ?)
-#    width   - width  ......
-#    xmin    - lowest x value we will display
-#    xmax    - highest .....
-#    ymin    - lowest y value .....
-#    ymax    - highest .....
-#    margin  - the number of pixels used as a margin around the plot
-#    tick    - the length (in pixels) of the tickmarks
-#    tst     - the step size for the tick marks
-#    tst[x|y]- step size for tick marks on the x (or y) axis
-#                (if not specified tst is used)
-#   $AxisRef->pack;
-#     (A Show method is supplied for compatibility with other widgets) 
-
 
 sub Populate    #using Populate from Tk::Derived
 {
@@ -120,6 +117,7 @@ sub Populate    #using Populate from Tk::Derived
 		  '-tst'    => ['PASSIVE',undef,undef,5],
 		  '-tstx'   => ['PASSIVE',undef,undef,undef],
 		  '-tsty'   => ['PASSIVE',undef,undef,undef],
+		  '-tickfont'   => ['PASSIVE',undef,undef,'fixed']
 		 ); # these options are new for the widget, the last value is 
                     # the default. 
 } #end of Populate
@@ -139,12 +137,14 @@ sub ConfigChanged {
   my $tst = $w->cget(-tst);
   my $tstx = $w->cget(-tstx);
   my $tsty = $w->cget(-tsty);
+  my $tickfont = $w->cget(-tickfont);
 
   if (!defined ($xmax) || !defined ($ymax)) { # at least xmax and ymax needed
     croak "Axis: `Show' method requires xmax and ymax";
   }
   if (!defined ($tstx)) {$tstx = $tst;}
   if (!defined ($tsty)) {$tsty = $tst;}
+  if (!defined ($tickfont)) {$tickfont = "fixed";}
 
   my ($zx,$zy,$t); # zx (zy) is the value (in window coordinates) where 
                    # x (y) is 0 on the X (Y) axis
@@ -179,8 +179,8 @@ sub ConfigChanged {
     my $x = ($cx-2*$mar)*($t-$xmin)/abs($xmax-$xmin) + $mar;
     $w->create('line',
 	       $x, $zy, $x, $zy+$tick);
-    $w->create('text',
-	       $x+5,$zy+20, text => $t, -anchor => 'sw');
+    $w->create('text', 
+	       $x+5,$zy+20, text => $t, -font => $tickfont,-anchor => 'sw');
   }
 
  # Y-axis
@@ -201,7 +201,7 @@ sub ConfigChanged {
     $w->create('line',
 	       $zx, $y, $zx-$tick, $y);
     $w->create('text',
-	       $zx -15,$y+20, text => $t, -anchor => 'sw');
+	       $zx -15,$y+20, text => $t, -font => $tickfont,-anchor => 'sw');
   }
 } # end ConfigChanged
 

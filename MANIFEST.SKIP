@@ -8,3 +8,4 @@ Makefile$
 \.old$
 \.bak$
 ^obsolete
+^tmpdist
