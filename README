@@ -37,13 +37,19 @@ v0.03: At least the 4 items build, test, and install (and the demo works)
 
 History:
 
+Version 0.0501
+
+	o Dial.pm: Oooops package was Dial not Tk::Dial as it should.
+	  Now CPAN indexer can get it right. Thanks to Andreas Koenig.
+
 Version 0.05
 
 	o patch of TiedListbox to fix scrolling
 
+		From: Andrew Allen <ada@hpesada.fc.hp.com>
 		Subject: Re: Database -> TiedListbox widget
 		Date: Fri, 12 Dec 1997 09:45:47 -0700
-		From: Andrew Allen <ada@hpesada.fc.hp.com>
+		Message-id: <199712121645.JAA22936@hpesada.fc.hp.com>
 
 Version 0.04
 

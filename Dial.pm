@@ -1,8 +1,8 @@
-package Dial;
+package Tk::Dial;
 require Tk::Frame;
 
 use vars qw($VERSION);
-$VERSION = substr(q$Revision: 1.3 $, 10) + 1;
+$VERSION = substr(q$Revision: 1.4 $, 10) + 1;
 
 @ISA = qw(Tk::Frame);           
 
