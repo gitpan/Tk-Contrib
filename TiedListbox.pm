@@ -1,19 +1,20 @@
-# $Id: TiedListbox.pm 1.4 Mon, 15 Dec 1997 19:06:23 +0100 ach $
+# $Id: TiedListbox.pm 1.5 Mon, 21 Sep 1998 23:02:17 +0200 ach $
 #
 # TiedListbox: tie together the scrolling and/or selection of Listboxes
 
 package Tk::TiedListbox;
 
-require Tk::Listbox;
+use strict;
+use Tk::Listbox;
 use Carp;
 
-@Tk::TiedListbox::ISA=qw(Tk::Derived Tk::Listbox);
+use vars qw($VERSION @ISA);
+$VERSION = substr(q$Revision: 1.5 $, 10) + 1;
+
+@ISA = qw(Tk::Derived Tk::Listbox);
 
 Tk::Widget->Construct('TiedListbox');
 
-
-use vars qw($VERSION);
-$VERSION = substr(q$Revision: 1.4 $, 10) + 1;
 
 
 use Tk::Submethods ( 'tie' => [qw(scroll selection all)],
@@ -32,6 +33,7 @@ sub tie {
     }
     @_=@{$_[0]} if ref($_[0]) eq 'ARRAY';
     $cw->{-tiedto}=[@_];
+    my $w;
     foreach $w (@_) {
       bless $w,ref($cw) if(ref($w)=~/Listbox$/); # Let's hope this works
       if(ref($w) eq ref($cw)) {
@@ -56,6 +58,7 @@ sub untie
 {
   my $cw=shift;
   my @ret=$cw->tie;
+  my $w;
   foreach $w (@{$cw->{-tiedto}}) {
     $w->{-tiedto}=[grep($_ ne $cw,@{$w->{-tiedto}})];
   }
@@ -143,6 +146,7 @@ sub CallTie {
   if(ref($cw->{'-tiedto'}) &&
      ($cw->{'-tieoption'} eq 'all' ||
       $cw->{'-tieoption'} eq $option)) {
+    my $w;
     foreach $w (@{$cw->{'-tiedto'}}) {
       &$tiesub($w,$supersub,@$args);
     }
@@ -157,6 +161,8 @@ __END__
 =head1 NAME
 
 Tk::TiedListbox - gang together Listboxes
+
+=for category Derived Widgets
 
 =head1 SYNOPSIS
 
@@ -176,7 +182,8 @@ and B<untie> are provided, along with overridden versions of some of
 the Listbox methods to provide tandem operation.
 
 Scrollbars are fully supported. You can use either explicitly created
-B<Scrollbar>s, the B<ScrlListbox> widget, or the B<Scrolled>
+L<Scrollbar|Tk::Scrollbar>s, the B<ScrlListbox> widget, or the
+L<Scrolled|Tk::Scrolled>
 super-widget. Tricks to "attach" multiple tied listboxes to a single
 scrollbar are unnecessary and will lead to multiple calls of the
 listbox methods (a bad thing).
@@ -273,7 +280,7 @@ You probably don't care about these. They are just details to tie
 together the behaviors of the listboxes.
 
 All overriden methods take identical arguments as the corresponding
-B<Listbox> methods (see the L<Listbox> documentation for a full
+B<Listbox> methods (see L<Tk::Listbox> for a full
 description). All overridden methods that take an index interpret that
 index in the context of the listbox object provided.
 
@@ -327,3 +334,4 @@ Andrew Allen <ada@fc.hp.com>
 This code may be distributed under the same conditions as Perl.
 
 =cut
+

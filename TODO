@@ -1,5 +1,19 @@
-o Is ptk reliable forwarded to c.l.p.tk so one could
-  savely suggest usenet users to post to ptk?
+
+o In 00basic.t:
+
+	..
+	Testing Axis
+	ok 14
+	ok 15
+	ok 16
+	ok 17
+	ok 18
+	Tk::Error: Axis: `Show' method requires xmax and ymax at t/00basic.t line 82
+ 	Carp::croak at /usr/local/perl5.005_01/lib/Carp.pm line 271
+ 	Tk::Axis::ConfigChanged at /data09a/ach/devel/tkcontrib/blib/lib/Tk/Axis.pm line 143
+ 	Idle Callback
+	ok 19
+	..
 
 o add demos for Axis, Dial, OlWm
 

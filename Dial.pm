@@ -1,19 +1,21 @@
 package Tk::Dial;
+use strict;
 require Tk::Frame;
 
-use vars qw($VERSION);
-$VERSION = substr(q$Revision: 1.4 $, 10) + 1;
+use vars qw($VERSION @ISA);
+$VERSION = substr(q$Revision: 1.5 $, 10) + 1;
 
-@ISA = qw(Tk::Frame);           
+@ISA = qw(Tk::Derived Tk::Frame);           
 
-$pi = atan2(1, 1) * 4;
+my $pi = atan2(1, 1) * 4;
 
 Construct Tk::Widget 'Dial';
 
 =head1 NAME
 
-Tk::Dial - an alternative to the Scale widget
+Tk::Dial - An alternative to the Scale widget
 
+=for category Derived Widgets
 
 =head1 SYNOPSIS
 
@@ -68,13 +70,14 @@ August 1995: Released for critique by pTk mailing list
 =cut 
 
 
-@flags = qw(-margin -radius -min -max -value -format);
+my @flags = qw(-margin -radius -min -max -value -format);
 
 sub Populate
 {
   my ($w, $args) = @_;
 
   @$w{@flags} = (20, 48, (0, 100), 0, '%d');
+  my $key;
   for $key (@flags) {
     my $val = delete $args->{$key};
     if (defined $val) {

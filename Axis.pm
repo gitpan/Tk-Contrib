@@ -4,6 +4,7 @@ package Tk::Axis;
 
 Tk::Axis - Canvas with Axes
 
+=for category Derived Widgets
 
 =head1 SYNOPSIS
 
@@ -13,7 +14,7 @@ Tk::Axis - Canvas with Axes
 		       -height   => $height,
 		       -margin   => $margin,
 		       -tick     => $tick,
-		       -tickfont => $tik_font,
+		       -tickfont => $tickfont,
 		       -tst      => $tst,
 		       -width    => $width,
 		       -xmin     => $xmin,
@@ -22,18 +23,18 @@ Tk::Axis - Canvas with Axes
 		       -ymax     => $ymax,
 		      );
 
-    #    height  - height of the window
-    #    width   - width  ......
-    #    xmin    - lowest x value we will display
-    #    xmax    - highest .....
-    #    ymin    - lowest y value .....
-    #    ymax    - highest .....
-    #    margin  - the number of pixels used as a margin around the plot
-    #    tick    - the length (in pixels) of the tickmarks
-    #    tst     - the step size for the tick marks
-    #    tst[x|y]- step size for tick marks on the x (or y) axis
+    #    $height  - height of the window
+    #    $width   - width  ......
+    #    $xmin    - lowest x value we will display
+    #    $xmax    - highest .....
+    #    $ymin    - lowest y value .....
+    #    $ymax    - highest .....
+    #    $margin  - the number of pixels used as a margin around the plot
+    #    $tick    - the length (in pixels) of the tickmarks
+    #    $tst     - the step size for the tick marks
+    #    $tst[x|y]- step size for tick marks on the x (or y) axis
     #                (if not specified tst is used)
-    #    tickfont    - for for the lables
+    #    $tickfont    - for for the lables
 
 
 =head1 DESCRIPTION
@@ -65,13 +66,13 @@ piece of code draws a line between the points (2 , 3.1)  (4 , 4).
 
 =cut 
 
-require 5.002;
+use strict;
 require Tk::Canvas;
 use Carp;
 
 
-use vars qw($VERSION);
-$VERSION = substr(q$Revision: 1.4 $, 10) + 1;
+use vars qw($VERSION @ISA);
+$VERSION = substr(q$Revision: 1.5 $, 10) + 1;
 
 @ISA = qw(Tk::Derived Tk::Canvas);
 
@@ -109,9 +110,9 @@ sub Populate    #using Populate from Tk::Derived
   $w->SUPER::Populate($args);
   $w->ConfigSpecs(
 		  '-xmin'   => ['PASSIVE',undef,undef,0],
-		  '-xmax'   => ['PASSIVE',undef,undef,undef],
+		  '-xmax'   => ['PASSIVE',undef,undef,100], #undef],
 		  '-ymin'   => ['PASSIVE',undef,undef,0],
-		  '-ymax'   => ['PASSIVE',undef,undef,undef],
+		  '-ymax'   => ['PASSIVE',undef,undef,100], #undef],
 		  '-margin' => ['PASSIVE',undef,undef,25],
 		  '-tick'   => ['PASSIVE',undef,undef,10],
 		  '-tst'    => ['PASSIVE',undef,undef,5],

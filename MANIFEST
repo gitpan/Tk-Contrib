@@ -8,6 +8,7 @@ README
 TODO
 TiedListbox.pm
 demos/tiedlistbox
+t/00basic.t
 t/axis.t
 t/dial.t
 t/olwm.t

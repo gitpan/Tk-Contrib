@@ -1,7 +1,7 @@
 package Tk::OlWm;
 
 use vars qw($VERSION);
-$VERSION = substr(q$Revision: 1.2 $, 10) + 1;
+$VERSION = substr(q$Revision: 1.3 $, 10) + 1;
 
 use Tk;
 use 5.004;
@@ -25,14 +25,14 @@ sub Update
  my $data = $mw->privateData;
  foreach my $kind (keys %$data)
   {
-   $mw->property('set',"_OL_DECOR_$kind",ATOM,32,[keys %{$data->{$kind}}]);
+   $mw->property('set',"_OL_DECOR_$kind",'ATOM',32,[keys %{$data->{$kind}}]);
   }
 }
 
 sub Flag
 {
  my ($name,$mw,$state) = @_;
- $mw->property('set',"_OL_$name",INTEGER,32,$state);
+ $mw->property('set',"_OL_$name",'INTEGER',32,$state);
  $mw->update if ($mw->IsMapped);
 }
 
@@ -73,6 +73,7 @@ __END__
 
 Tk::OlWm - Interface to OpenLook properties of toplevel windows.
 
+=for category Tk Geometry Management
 
 =head1 SYNOPSIS
 
@@ -94,8 +95,9 @@ Tk::OlWm - Interface to OpenLook properties of toplevel windows.
 
 =head1 DESCRIPTION
 
-A simple perl-only module that adds a few methods to L<Tk::Wm> class.
-These methods manipulate properties of the C<$toplevel> to communicate 
+A simple perl-only module that adds a few methods to L<Tk::Wm|Tk::Wm> class.
+These methods manipulate properties of the L<$toplevel|Tk::Toplevel> to
+communicate 
 with an OpenLook window manager, e.g. Sun's C<olwm> or C<olvwm>.
 
 In the synopsis above C<flag> is a "boolean" value - i.e. an integer 
@@ -114,5 +116,4 @@ and guessing.
 Nick Ing-Simmons <nik@tiuk.ti.com>
 
 =cut
-
 
