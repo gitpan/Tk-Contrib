@@ -1,0 +1,81 @@
+Files in Tk-Contrib have been contributed by various people at 
+various times. No attempt has been made by perl/Tk's author to 
+verify that they work with this release of perl/Tk.
+
+
+Included widgets:
+
+	Tk::Axis - Canvas with Axes
+	Tk::Dial - an alternative to the Scale widget
+	Tk::OlWm - Interface to OpenLook properties of Toplevel widget.
+	Tk::TiedListbox - gang together Listboxes
+
+
+Installation:
+
+	perl Makefile.PL
+	make
+	make test
+	# try script(s) in demo directory (optional)
+	make install
+
+Please send question, suggestions, bug reports and patches to
+the perl/Tk mailing list
+
+	ptk@lists.stanford.edu
+
+Achim Bohnet <ach@mpe.mpg.de>
+
+
+Success Reports:
+
+v0.03: At least the 4 items build, test, and install (and the demo works)
+
+	perl5.004_54/Tk402.003
+		SPARC/Solaris 2.5.1/Sun Compiler
+	perl5.004_04/Tk402.003
+		Digital Unix V4.0b, DEC CC compiler
+
+History:
+
+Version 0.04
+
+	o Typos fixed in README (Larry Virden <lvirden@cas.org>)
+
+	o Many little documentation fixes (Larry Virden <lvirden@cas.org>)
+
+	o (Mis)use $Revision: 1.4 $ of prcs for $VERSION.  '+1' offset necessary to
+	  get a new $VERSION higer than 2.00x :-(
+
+	o README: Added simple success reports lists for this distribution
+
+Version 0.03
+
+	o now flat subdirectory structure
+
+	o demos/tiedlistbox strict and -w clean
+
+Version 0.02
+
+	o added trivial tests: may only uncover possible -w warnings
+
+	o Each contribution has it's own dir that a ready CPAN dist
+	  after
+
+		# add README file
+		echo 'Makefile$' > MANIFEST.SKIP
+		mkdir t && 
+		perl Makefile.PL
+		make manifest
+		make dist
+
+	  Blech!  Better remove subdir overhead and write a CPAN HOWTO
+
+	o MM NAME attr set to Tk::Whatever => better perllocal.pod
+	  entry but creates unnecessary auto/Tk/Whatever/.packlist
+
+	
+	o Removed FileDialog and WaitBox. They have their
+	  own CPAN distribution already
+
+	o Removed book-examples and TickerTape. Th
