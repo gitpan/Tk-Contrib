@@ -2,7 +2,7 @@ package Dial;
 require Tk::Frame;
 
 use vars qw($VERSION);
-$VERSION = substr(q$Revision: 1.2 $, 10) + 1;
+$VERSION = substr(q$Revision: 1.3 $, 10) + 1;
 
 @ISA = qw(Tk::Frame);           
 
@@ -19,12 +19,12 @@ Tk::Dial - an alternative to the Scale widget
 
     use Tk::Dial;
 
-    $dial = $top->Dial(-margin =>  20,
-		       -radius =>  48,
-		       -min    =>   0,
-		       -max    => 100,
-		       -value  =>   0,
-		       -format => '%d');
+    $dial = $widget->Dial(-margin =>  20,
+		          -radius =>  48,
+		          -min    =>   0,
+		          -max    => 100,
+		          -value  =>   0,
+		          -format => '%d');
 
 
     margin - blank space to leave around dial

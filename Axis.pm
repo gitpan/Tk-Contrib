@@ -7,9 +7,9 @@ Tk::Axis - Canvas with Axes
 
 =head1 SYNOPSIS
 
-  $mw = MainWindow->new;                                           
-  $t = $mw->Axis(-xmax => 10, -ymax => 10);                        
-  $t->create('line',$t->plx(2),$t->ply(3.1),$t->plx(4),$t->ply(4));
+    use Tk::Axis;
+
+    $t = $widget->Axis(-xmax => 10, -ymax => 10);                        
 
 
 =head1 DESCRIPTION
@@ -28,6 +28,8 @@ the 'pack' has been moved out the widget. One has to do his own packing
 it is now possible to work in the coordinates of the axis. The following
 piece of code draws a line between the points (2 , 3.1)  (4 , 4).
 
+    $t->create('line',$t->plx(2),$t->ply(3.1),$t->plx(4),$t->ply(4));
+
 =back 
 
 
@@ -45,7 +47,7 @@ use Carp;
 
 
 use vars qw($VERSION);
-$VERSION = substr(q$Revision: 1.2 $, 10) + 1;
+$VERSION = substr(q$Revision: 1.3 $, 10) + 1;
 
 @ISA = qw(Tk::Derived Tk::Canvas);
 

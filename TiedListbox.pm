@@ -1,4 +1,4 @@
-# $Id: TiedListbox.pm 1.2 Tue, 18 Nov 1997 16:39:10 +0100 ach $
+# $Id: TiedListbox.pm 1.4 Mon, 15 Dec 1997 19:06:23 +0100 ach $
 #
 # TiedListbox: tie together the scrolling and/or selection of Listboxes
 
@@ -13,7 +13,7 @@ Tk::Widget->Construct('TiedListbox');
 
 
 use vars qw($VERSION);
-$VERSION = substr(q$Revision: 1.2 $, 10) + 1;
+$VERSION = substr(q$Revision: 1.4 $, 10) + 1;
 
 
 use Tk::Submethods ( 'tie' => [qw(scroll selection all)],
@@ -79,7 +79,7 @@ sub ActivateTie {
 sub scan {
   my $cw=shift;
   $cw->SUPER::scan(@_);
-  $cw->CallTie('scroll','yview',[($cw->SUPER::yview)[0]*$cw->size]);
+  $cw->CallTie('scroll','yview',[int(($cw->SUPER::yview)[0]*$cw->size+.5)]);
 }
 
 sub see {
@@ -119,11 +119,11 @@ sub yview {
   if(@_) {
     if($_[0] eq 'moveto') {
       $cw->SUPER::yview(@_);
-      $cw->CallTie('scroll','yview',[($cw->SUPER::yview)[0]*$cw->size]);
+      $cw->CallTie('scroll','yview',[int(($cw->SUPER::yview)[0]*$cw->size+.5)]);
     }
     elsif($_[0] eq 'scroll') {
       $cw->SUPER::yview(@_);
-      $cw->CallTie('scroll','yview',[($cw->SUPER::yview)[0]*$cw->size]);
+      $cw->CallTie('scroll','yview',[int(($cw->SUPER::yview)[0]*$cw->size+.5)]);
     }
     else {
       $cw->CallTie('scroll','yview',[$cw->index($_[0])]);
@@ -133,17 +133,6 @@ sub yview {
     return $cw->SUPER::yview();
   }
 }
-
-sub YviewScrollTie {
-  my($w,$sub,$cw,$action,$num,$what)=@_;
-  if($w eq $cw) {
-    $w->$sub($action,$num,$what);
-  }
-  else {
-    $w->$sub('moveto',($cw->yview)[0]*$cw->size/$w->size);
-  }
-}
-
 
 sub CallTie {
   my($cw,$option,$sub,$args,$tiesub)=@_;
@@ -173,9 +162,9 @@ Tk::TiedListbox - gang together Listboxes
 
     use Tk::TiedListbox
 
-    $l1 = $mw->Listbox(-exportselection => 0,...);
-    $l2 = $mw->Listbox(-exportselection => 0,...);
-    $l3 = $mw->Listbox(-exportselection => 0,...);
+    $l1 = $widget->Listbox(-exportselection => 0,...);
+    $l2 = $widget->Listbox(-exportselection => 0,...);
+    $l3 = $widget->Listbox(-exportselection => 0,...);
     $l1->tie([$l2,$l3]);
 
 =head1 DESCRIPTION

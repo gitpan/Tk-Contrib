@@ -1,5 +1,5 @@
-o Is ptk realiable forwarded to c.l.p.tk so one could
-  savely suggest to usenet user to post to ptk?
+o Is ptk reliable forwarded to c.l.p.tk so one could
+  savely suggest usenet users to post to ptk?
 
 o add demos for Axis, Dial, OlWm
 
@@ -9,7 +9,8 @@ o Check if contribs also work on win32
 
 o Axis has docs in comments that should be wrapped into POD
 
-o Make TickerTape example into a composite widget?
+o Make TickerTape example into a composite widget
+  or a part of perl/tk widget demo?
 
 o Find new home for removed book-examples 
 
@@ -22,13 +23,13 @@ o Axis: authors lost:  email/http as in POD does both not work:
 	   Kris Boulez            (Kris.Boulez@rug.ac.be)
 	   Biomolecular NMR unit  <http://bionmr1.rug.ac.be/~kris>
 
-   Larry Virden thinks it kris@uunet.be. He also tries to get a URL
+   Larry Virden thinks it kris@uunet.be. He also tries to get an URL
 
 o Larry Virden suggested:
 
-	I think the README should indicate (and the code as well) what version
-	of pTk IS verified to work with them.  Perhaps even create sub
-	directories by version of perl and/or pTk for them.  Also, the platforms
-	on which they are verified to work would be useful to mention.
+    I think the README should indicate (and the code as well) what version
+    of pTk IS verified to work with them.  Perhaps even create sub
+    directories by version of perl and/or pTk for them.  Also, the platforms
+    on which they are verified to work would be useful to mention.
 
 

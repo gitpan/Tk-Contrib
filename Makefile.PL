@@ -1,12 +1,10 @@
 use ExtUtils::MakeMaker;
 
-$::VERSION = '0.04';
-
 WriteMakefile (
 	'NAME'		=> 'Tk::Contrib',	# for better perllocal.pod entry
 	'DISTNAME'	=> 'Tk-Contrib',
-	'VERSION'	=> $VERSION,
+	'VERSION'	=> '0.05',
 
-	'dist'		=> { 'COMPRESS' => 'gzip', 'SUFFIX' => 'gz' },
+	'dist'		=> { 'COMPRESS' => 'gzip -9f', 'SUFFIX' => 'gz' },
 );
 
